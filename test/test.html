@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Testing Room </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+  <body>
+    <div id="container">
+      <h1 id="thetitle">Welcome to the Testing Room.</h1>
+      <h2 id="question">When you are ready for your exam, please press start.</h2>
+      <button type="button" id="startbtn">Start</button>
+      <div id=answers></div>
+      <button type="button" id="next" style="visibility:hidden;">Next</button>
+
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="test.js">const myQuestions = myQuestions; </script>
+    <script type="text/javascript">
+
+      //load variables from DOM
+      const start = document.getElementById('startbtn');
+      const title = document.getElementById('thetitle');
+      const element = document.getElementById('answers');
+      const next = document.getElementById('next');
+
+      //other variables
+      let counter = 1;
+      let output = '';
+
+      start.onclick = () => {
+
+        //changes the start button to the next button for exam
+        start.parentNode.removeChild(start);
+        display();
+        next.style.visibility="visible";
+      }
+
+      next.onclick = () => {
+        if(myQuestions.length === counter){
+          next.style.visibility="hidden";
+        }else{
+          counter++;
+          output = '';
+          display();
+        }
+      }
+
+      function display(){
+        title.innerHTML = "Question " + counter;
+        question.innerHTML = myQuestions[counter-1].question;
+        for(letter in myQuestions[counter-1].answers){
+          output += '<input type="radio" name="answer" />' + myQuestions[counter-1].answers[letter];
+          element.innerHTML=output;
+        }
+      }
+
+    </script>
+
+  </body>
+</html>
